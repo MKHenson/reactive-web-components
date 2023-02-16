@@ -11,21 +11,30 @@ This project is a demonstration of how you can create reactive Web Components wi
 
 ```
 interface Props {
-  onClick?: (e: MouseEvent) => void;
+  onMaxReached: () => void;
   disabled?: boolean;
   fullwidth?: boolean;
 }
 
-@register("x-button")
-export class Button extends Component<Props> {
+@register("x-button-counter")
+export class ButtonCounter extends Component<Props> {
   constructor() {
     super({ props: { fullwidth: false, disabled: false } });
   }
 
   init() {
+    const [count, setCount] = this.useState(0)
+
+    const onClick = (e) => {
+        if (count() < 10>)
+            setCount(count() + 1)
+        else
+            this.props.onMaxReached();
+    }
+
     return () => (
-      <button disabled={this.props.disabled} onclick={this.props.onClick}>
-        <slot></slot>
+      <button disabled={this.props.disabled} onclick={onClick}>
+        This button count is {count()}
       </button>
     );
   }
