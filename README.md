@@ -9,7 +9,7 @@ This project is a demonstration of how you can create reactive Web Components wi
 
 ## Example Usage
 
-```
+```typescript
 interface Props {
   onMaxReached: () => void;
   disabled?: boolean;
