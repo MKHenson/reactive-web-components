@@ -49,7 +49,7 @@ export class Application extends Component {
     );
   }
 
-  stlye() {
+  getStlye() {
     return css`
       h1 {
         margin: 0 0 2rem 0;

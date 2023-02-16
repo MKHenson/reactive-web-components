@@ -36,7 +36,7 @@ export class Calculator extends Component<Props> {
     );
   }
 
-  stlye() {
+  getStlye() {
     return css`
       .calc-body {
         display: block;

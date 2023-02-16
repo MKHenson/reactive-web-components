@@ -45,7 +45,7 @@ export abstract class Component<T = any> extends HTMLElement {
     this._props = options?.props as any;
 
     this.render = () => {
-      const css = this.stlye();
+      const css = this.getStlye();
 
       let children = fn();
       let existingChildren = parent.children;
@@ -112,7 +112,7 @@ export abstract class Component<T = any> extends HTMLElement {
   /**
    * Optionally override this function to provide the component with styling
    */
-  stlye(): string | null {
+  getStlye(): string | null {
     return null;
   }
 

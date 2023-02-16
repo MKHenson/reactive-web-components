@@ -20,7 +20,7 @@ export class Button extends Component<Props> {
     );
   }
 
-  stlye() {
+  getStlye() {
     return css`
       :host {
         display: ${this.props.fullwidth ? "block" : "inline-block"};

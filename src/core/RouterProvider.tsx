@@ -35,9 +35,7 @@ export class RouterProvider extends Component<Props> {
   }
 
   init() {
-    return () => {
-      return null;
-    };
+    return () => null;
   }
 
   connectedCallback(): void {

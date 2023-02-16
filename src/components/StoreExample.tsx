@@ -20,7 +20,7 @@ export class StoreExample extends Component {
     );
   }
 
-  stlye() {
+  getStlye() {
     return css`
       h2 {
         margin: 0 0 1rem 0;
@@ -77,7 +77,7 @@ export class StoreReader extends Component {
     );
   }
 
-  stlye() {
+  getStlye() {
     return css`
       :host {
         display: block;
@@ -130,7 +130,7 @@ export class StoreWriter extends Component {
     );
   }
 
-  stlye() {
+  getStlye() {
     return css`
       :host {
         display: block;
