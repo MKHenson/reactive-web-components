@@ -1,15 +1,5 @@
-# reactive-web-components
+import { Component, register } from "../core/Component";
 
-This project is a project to demonstrate the idea. Using it, you can create reactive Web Components with JSX syntax and Typescript static type checking. The JSX gets converted to native JS elements and the Web Components do the same with a few other key features.
-
-## Installation
-
-    npm i
-    npm run start
-
-## Example Usage
-
-```
 interface Props {
   onClick?: (e: MouseEvent) => void;
   disabled?: boolean;
@@ -48,4 +38,3 @@ export class Button extends Component<Props> {
     `;
   }
 }
-```
