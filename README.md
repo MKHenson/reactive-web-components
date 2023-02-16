@@ -1,6 +1,6 @@
 # Reactive Web Components
 
-This project is a project to demonstrate the idea. Using it, you can create reactive Web Components with JSX syntax and Typescript static type checking. The JSX gets converted to native JS elements and the Web Components do the same with a few other key features.
+This project is a demonstration of how you can create reactive Web Components with a JSX syntax and Typescript static type checking. The JSX gets converted to native JS elements and the Web Components do the same with a few other key features. The project comes with a demo to learn from.
 
 ## Installation
 
