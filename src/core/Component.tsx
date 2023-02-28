@@ -1,7 +1,8 @@
-import { Store, UnsubscribeStoreFn } from "./Store";
+import { UnsubscribeStoreFn } from "./Signaller";
+import { Store } from "./Store";
 
 type RenderFn = () => void;
-type InitFn = () => null | ChildType | ChildType[];
+type InitFn = () => null | JSX.ChildElement | JSX.ChildElement[];
 
 /** registers a class as a web component*/
 export function register<
@@ -19,16 +20,17 @@ export interface ComponentOptions<T> {
   shadow?: ShadowRootInit;
 }
 
-export type ChildType = Node | Element | string | undefined | number;
-
 /**
  * Base class for all web components
  */
-export abstract class Component<T = any> extends HTMLElement {
+export abstract class Component<T = any>
+  extends HTMLElement
+  implements JSX.Component
+{
   shadow: ShadowRoot | null;
   render: RenderFn;
   private trackedStores: UnsubscribeStoreFn[];
-  _props: T & { children?: ChildType | ChildType[] };
+  _props: T & { children?: JSX.ChildElement | JSX.ChildElement[] };
 
   constructor(options?: ComponentOptions<T>) {
     super();
@@ -38,11 +40,11 @@ export abstract class Component<T = any> extends HTMLElement {
     this.shadow = useShadow
       ? this.attachShadow(options?.shadow || { mode: "open" })
       : null;
-    const parent = useShadow ? this.shadow! : this;
-
-    const fn = this.init();
-
     this._props = options?.props as any;
+  }
+
+  _createRenderer() {
+    const parent = this.shadow ?? this;
 
     this.render = () => {
       const css = this.getStlye();
@@ -86,13 +88,15 @@ export abstract class Component<T = any> extends HTMLElement {
         }
       }
     };
+
+    const fn = this.init();
   }
 
-  get props(): T & { children?: ChildType | ChildType[] } {
+  get props(): T & { children?: JSX.ChildElement | JSX.ChildElement[] } {
     return this._props;
   }
 
-  set props(val: T & { children?: ChildType | ChildType[] }) {
+  set props(val: T & { children?: JSX.ChildElement | JSX.ChildElement[] }) {
     this._props = val || ({} as any);
     this.render();
   }
@@ -104,7 +108,7 @@ export abstract class Component<T = any> extends HTMLElement {
    * @returns
    */
   observeStore<K extends object>(store: Store<K>, path?: string) {
-    const [val, unsubscribe] = store.proxy(this, path);
+    const [val, unsubscribe] = store.createProxy(this.render, path);
     this.trackedStores.push(unsubscribe);
     return val;
   }

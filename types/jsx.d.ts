@@ -16,14 +16,17 @@ declare namespace JSX {
 
   type Tag = keyof JSX.IntrinsicElements;
 
-  interface Component {
-    (properties?: { [key: string]: any }, children?: ChildElement[]): Node;
-    properties: { [key: string]: any };
+  interface Component<T extends any = any> extends HTMLElement {
+    // (properties?: { [key: string]: any }, children?: ChildElement[]): Node;
+    props: T & { children?: ChildElement | ChildElement[] };
+    _props: T & { children?: ChildElement | ChildElement[] };
+    _createRenderer: () => void;
   }
+
+  type FC<P> = (props: P) => HTMLElement;
 
   interface ComponentStatic {
     new (): Component;
-    (properties?: { [key: string]: any }, children?: ChildElement[]): Node;
     tagName?: string;
   }
 }

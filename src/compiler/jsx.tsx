@@ -5,34 +5,39 @@ function jsx<T extends JSX.Tag = JSX.Tag>(
 ): JSX.Element;
 function jsx(
   tag: JSX.Component,
+  attributes: { [key: string]: any } | null,
+  ...children: JSX.ChildElement[]
+): Node;
+function jsx(
+  tag: JSX.FC<any>,
   attributes: Parameters<typeof tag> | null,
   ...children: JSX.ChildElement[]
 ): Node;
 function jsx(
-  tag: JSX.ComponentStatic,
-  attributes: Parameters<typeof tag> | null,
-  ...children: JSX.ChildElement[]
-): Node;
-function jsx(
-  tag: JSX.Tag | JSX.Component | JSX.ComponentStatic,
+  tag: JSX.Tag | JSX.Component | JSX.FC<any>,
   attributes: { [key: string]: any } | null,
   ...children: JSX.ChildElement[]
 ) {
   // Check if this is a web component
-  if (typeof tag === "function" && (tag as JSX.ComponentStatic).tagName) {
+  if (
+    typeof tag === "function" &&
+    (tag as unknown as JSX.ComponentStatic).tagName
+  ) {
     const element = document.createElement(
-      (tag as JSX.ComponentStatic).tagName!
-    ) as JSX.Element;
-    (element as any)._props = { ...element.props, ...attributes, children };
+      (tag as unknown as JSX.ComponentStatic).tagName!
+    ) as JSX.Component;
+    element._props = { ...element._props, ...attributes, children };
+    element._createRenderer();
     appendChildren(element, children);
     return element;
   }
 
   // Check if a functional component
   if (typeof tag === "function") {
-    return tag(attributes ?? {}, children);
+    return (tag as JSX.FC<any>)(attributes ?? {});
   }
-  const element = document.createElement(tag);
+
+  const element = document.createElement(tag as JSX.Tag);
 
   // Assign attributes:
   let map = attributes ?? {};
