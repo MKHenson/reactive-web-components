@@ -95,3 +95,9 @@ function appendChildren(element: HTMLElement, children: JSX.ChildElement[]) {
   str = str.replace(/\r?\n|\r/g, "");
   return str;
 };
+
+(window as any).cssStylesheet = (val: string) => {
+  const stylesheet = new CSSStyleSheet();
+  stylesheet.replaceSync(val);
+  return stylesheet;
+};

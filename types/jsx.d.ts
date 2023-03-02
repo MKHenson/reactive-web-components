@@ -36,3 +36,4 @@ declare function css(
   val: TemplateStringsArray,
   ...rest: (TemplateStringsArray | string | number)[]
 ): string;
+declare function cssStylesheet(val: string): CSSStyleSheet;

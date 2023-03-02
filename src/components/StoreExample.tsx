@@ -20,29 +20,8 @@ export class StoreExample extends Component {
     );
   }
 
-  getStlye() {
-    return css`
-      h2 {
-        margin: 0 0 1rem 0;
-      }
-
-      .info {
-        display: block;
-        width: 400px;
-        margin: 0 0 1rem 0;
-      }
-
-      .col-2 {
-        display: flex;
-        align-items: center;
-        width: 835px;
-      }
-
-      .col-2 > * {
-        flex: 1;
-        margin: 0 1rem 0 0;
-      }
-    `;
+  getStyle() {
+    return StyledStoreContainer;
   }
 }
 
@@ -77,27 +56,8 @@ export class StoreReader extends Component {
     );
   }
 
-  getStlye() {
-    return css`
-      :host {
-        display: block;
-        width: 400px;
-        height: 100px;
-        padding: 1rem;
-        background: #efefef;
-        border-radius: 5px;
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-        margin: 1rem 0;
-      }
-
-      .loading {
-        color: #5151c9;
-      }
-
-      h4 {
-        margin: 0 0 1rem 0;
-      }
-    `;
+  getStyle() {
+    return StyledStoreReader;
   }
 }
 
@@ -130,21 +90,67 @@ export class StoreWriter extends Component {
     );
   }
 
-  getStlye() {
-    return css`
-      :host {
-        display: block;
-        width: 400px;
-        height: 100px;
-        padding: 1rem;
-        background: #efefef;
-        border-radius: 5px;
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-      }
-
-      h4 {
-        margin: 0 0 1rem 0;
-      }
-    `;
+  getStyle() {
+    return StyledStoreWriter;
   }
 }
+
+const StyledStoreReader = cssStylesheet(css`
+  :host {
+    display: block;
+    width: 400px;
+    height: 100px;
+    padding: 1rem;
+    background: #efefef;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    margin: 1rem 0;
+  }
+
+  .loading {
+    color: #5151c9;
+  }
+
+  h4 {
+    margin: 0 0 1rem 0;
+  }
+`);
+
+const StyledStoreWriter = cssStylesheet(css`
+  :host {
+    display: block;
+    width: 400px;
+    height: 100px;
+    padding: 1rem;
+    background: #efefef;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  h4 {
+    margin: 0 0 1rem 0;
+  }
+`);
+
+const StyledStoreContainer = cssStylesheet(css`
+  h2 {
+    margin: 0 0 1rem 0;
+  }
+
+  .info {
+    display: block;
+    width: 400px;
+    margin: 0 0 1rem 0;
+  }
+
+  .col-2 {
+    display: flex;
+    align-items: center;
+    width: 835px;
+  }
+
+  .col-2 > * {
+    flex: 1;
+    margin: 0 1rem 0 0;
+  }
+`);

@@ -13,28 +13,37 @@ export class Button extends Component<Props> {
   }
 
   init() {
-    return () => (
-      <button disabled={this.props.disabled} onclick={this.props.onClick}>
-        <slot></slot>
-      </button>
-    );
+    return () => {
+      this.toggleAttribute("fullwidth", this.props.fullwidth);
+
+      return (
+        <button disabled={this.props.disabled} onclick={this.props.onClick}>
+          <slot></slot>
+        </button>
+      );
+    };
   }
 
-  getStlye() {
-    return css`
-      :host {
-        display: ${this.props.fullwidth ? "block" : "inline-block"};
-      }
-
-      button {
-        padding: 1rem;
-        background: #396ab8;
-        color: white;
-      }
-
-      button:hover {
-        background: #284b84;
-      }
-    `;
+  getStyle() {
+    return StyledButton;
   }
 }
+
+const StyledButton = cssStylesheet(css`
+  :host {
+    display: inline-block;
+  }
+  :host([fullwidth]) {
+    display: block;
+  }
+
+  button {
+    padding: 1rem;
+    background: #396ab8;
+    color: white;
+  }
+
+  button:hover {
+    background: #284b84;
+  }
+`);

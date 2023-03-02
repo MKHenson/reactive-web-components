@@ -49,24 +49,26 @@ export class Application extends Component {
     );
   }
 
-  getStlye() {
-    return css`
-      h1 {
-        margin: 0 0 2rem 0;
-      }
-
-      .content {
-        display: flex;
-        padding: 1rem;
-      }
-
-      .nav {
-        flex: 1;
-      }
-
-      .routes {
-        flex: 4;
-      }
-    `;
+  getStyle() {
+    return StyledApplication;
   }
 }
+
+const StyledApplication = cssStylesheet(css`
+  h1 {
+    margin: 0 0 2rem 0;
+  }
+
+  .content {
+    display: flex;
+    padding: 1rem;
+  }
+
+  .nav {
+    flex: 1;
+  }
+
+  .routes {
+    flex: 4;
+  }
+`);

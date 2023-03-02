@@ -36,24 +36,26 @@ export class Calculator extends Component<Props> {
     );
   }
 
-  getStlye() {
-    return css`
-      .calc-body {
-        display: block;
-        width: 400px;
-        padding: 1rem;
-        background: #efefef;
-        border-radius: 5px;
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-      }
-
-      h2 {
-        margin: 0 0 1rem 0;
-      }
-
-      x-button {
-        margin: 1rem 0 0 0;
-      }
-    `;
+  getStyle() {
+    return StyledCalculator;
   }
 }
+
+const StyledCalculator = cssStylesheet(css`
+  .calc-body {
+    display: block;
+    width: 400px;
+    padding: 1rem;
+    background: #efefef;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  h2 {
+    margin: 0 0 1rem 0;
+  }
+
+  x-button {
+    margin: 1rem 0 0 0;
+  }
+`);
