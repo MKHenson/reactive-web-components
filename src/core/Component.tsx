@@ -97,7 +97,7 @@ export abstract class Component<T = any>
    * @param path [Optional] Path can be specified using dot notation to only render if the propety name matches. For example "foo.bar" will trigger a render for any change to fields of bar or beyond (foo.bar.baz = 1 or even foo.bar.baz.gar = 1)
    * @returns
    */
-  observeStore<K extends object>(store: Store<K>, cb?: Callback) {
+  observeStore<K extends object>(store: Store<K>, cb?: Callback<K>) {
     const [val, unsubscribe] = store.createProxy(cb || this.render);
     this.trackedStores.push(unsubscribe);
     return val;

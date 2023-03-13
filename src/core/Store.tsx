@@ -11,7 +11,7 @@ export class Store<T extends object> {
     this.defaultProxy = proxy;
   }
 
-  createProxy(cb?: Callback, path?: string) {
+  createProxy(cb?: Callback<T>, path?: string) {
     return this.signaller.proxy(cb, path);
   }
 }
